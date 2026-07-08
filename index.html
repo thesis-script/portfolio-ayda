@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,500;9..144,1,400;9..144,1,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --blue: #3D6FE0;
+      --blue-soft: #7AA2FF;
+      --orange: #E0823D;
+      --orange-soft: #F2B57E;
+    }
+
+    html[data-theme="dark"] {
+      --bg: #08090D;
+      --surface: rgba(255, 255, 255, 0.035);
+      --surface-hover: rgba(255, 255, 255, 0.055);
+      --line: rgba(255, 255, 255, 0.09);
+      --ink: #F3F1EA;
+      --muted: #92968E9F;
+      --muted: #9AA0AE;
+      --shadow: rgba(0, 0, 0, 0.5);
+    }
+
+    html[data-theme="light"] {
+      --bg: #FAF8F4;
+      --surface: #FFFFFF;
+      --surface-hover: #FFFFFF;
+      --line: rgba(20, 20, 20, 0.09);
+      --ink: #16171B;
+      --muted: #6B6E78;
+      --shadow: rgba(20, 20, 30, 0.10);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      transition: background 0.5s ease, color 0.5s ease;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    /* ---------- ambient background ---------- */
+    .bg-scene {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .glow {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      will-change: transform;
+      transition: opacity 0.6s ease;
+    }
+
+    .glow.g1 {
+      width: 42vw;
+      height: 42vw;
+      top: -16vw;
+      left: -8vw;
+      background: radial-gradient(circle, var(--blue-soft), transparent 70%);
+      opacity: 0.16;
+      animation: drift1 34s ease-in-out infinite;
+    }
+
+    .glow.g2 {
+      width: 36vw;
+      height: 36vw;
+      bottom: -14vw;
+      right: -6vw;
+      background: radial-gradient(circle, var(--orange-soft), transparent 70%);
+      opacity: 0.14;
+      animation: drift2 38s ease-in-out infinite;
+    }
+
+    html[data-theme="light"] .glow {
+      opacity: 0.22;
+    }
+
+    @keyframes drift1 {
+
+      0%,
+      100% {
+        transform: translate(0, 0);
+      }
+
+      50% {
+        transform: translate(4vw, 5vw);
+      }
+    }
+
+    @keyframes drift2 {
+
+      0%,
+      100% {
+        transform: translate(0, 0);
+      }
+
+      50% {
+        transform: translate(-4vw, -4vw);
+      }
+    }
+
+    /* ---------- theme toggle ---------- */
+    .toggle {
+      position: fixed;
+      top: 2rem;
+      right: 6vw;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      padding: 0.4rem;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 24px var(--shadow);
+    }
+
+    .toggle button {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.35s ease, color 0.35s ease, transform 0.3s ease;
+    }
+
+    .toggle button svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .toggle button.active {
+      background: linear-gradient(135deg, var(--blue), var(--orange));
+      color: #fff;
+    }
+
+    .toggle button:hover {
+      transform: scale(1.08);
+    }
+
+    /* ---------- header ---------- */
+    header {
+      position: relative;
+      z-index: 2;
+      padding: 7rem 6vw 3.5rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--orange);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.8rem;
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards;
+    }
+
+    .eyebrow::before {
+      content: '';
+      width: 30px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--orange), var(--blue));
+    }
+
+    h1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: clamp(2.6rem, 6.4vw, 5.2rem);
+      line-height: 1.06;
+      letter-spacing: -0.01em;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.12s forwards;
+    }
+
+    h1 em {
+      font-style: italic;
+      font-weight: 400;
+      background: linear-gradient(100deg, var(--blue) 0%, var(--orange) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ---------- sections ---------- */
+    section.group {
+      position: relative;
+      z-index: 2;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 3.5rem 6vw;
+    }
+
+    .group-head {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 2.6rem;
+      opacity: 0;
+      transform: translateY(14px);
+    }
+
+    .group-head.in-view {
+      animation: fadeUp 0.7s ease forwards;
+    }
+
+    .group-head h2 {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 1.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+    }
+
+    .group-head .num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      padding: 0.3rem 0.75rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.75rem;
+    }
+
+    /* ---------- cards ---------- */
+    .card {
+      --mx: 50%;
+      --my: 50%;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      text-decoration: none;
+      display: block;
+      position: relative;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: transform 0.5s cubic-bezier(.2, .8, .2, 1), box-shadow 0.5s ease, background 0.4s ease, border-color 0.4s ease;
+    }
+
+    .card.in-view {
+      animation: cardIn 0.75s cubic-bezier(.2, .8, .2, 1) forwards;
+    }
+
+    @keyframes cardIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      background: radial-gradient(260px circle at var(--mx) var(--my), rgba(224, 130, 61, 0.14), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .card:hover,
+    .card:focus-visible {
+      transform: translateY(-7px);
+      box-shadow: 0 26px 50px -24px var(--shadow);
+      background: var(--surface-hover);
+      border-color: var(--blue-soft);
+      outline: none;
+    }
+
+    .card:hover::after {
+      opacity: 1;
+    }
+
+    .preview {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      background: var(--surface);
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .preview iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 400%;
+      height: 400%;
+      transform: scale(0.25);
+      transform-origin: top left;
+      border: none;
+      pointer-events: none;
+      background: #fff;
+      transition: transform 0.7s ease;
+    }
+
+    .card:hover .preview iframe {
+      transform: scale(0.265);
+    }
+
+    .preview .veil {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 58%, var(--bg) 100%);
+      opacity: 0.9;
+      transition: background 0.5s ease;
+    }
+
+    .preview .visit {
+      position: absolute;
+      bottom: 0.9rem;
+      right: 0.9rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.05em;
+      background: var(--ink);
+      color: var(--bg);
+      padding: 0.4rem 0.8rem;
+      border-radius: 100px;
+      font-weight: 500;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .card:hover .visit {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .meta {
+      padding: 1.4rem 1.5rem 1.7rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .meta .tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.66rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--blue-soft);
+      display: block;
+      margin-bottom: 0.55rem;
+    }
+
+    .meta h3 {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 1.32rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .meta p {
+      color: var(--muted);
+      font-size: 0.87rem;
+      line-height: 1.6;
+    }
+
+    .meta .url {
+      display: block;
+      margin-top: 0.95rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--orange);
+      word-break: break-all;
+    }
+
+    .divider {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 6vw;
+      position: relative;
+      z-index: 2;
+    }
+
+    .divider .line {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--blue), var(--orange), transparent);
+      opacity: 0.5;
+    }
+
+    footer {
+      position: relative;
+      z-index: 2;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 3rem 6vw 4.5rem;
+      border-top: 1px solid var(--line);
+      text-align: center;
+    }
+
+    footer .credit {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+
+    footer .credit span {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      background: linear-gradient(120deg, var(--blue), var(--orange));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    @media (max-width:640px) {
+      header {
+        padding: 6rem 6vw 2.5rem;
+      }
+
+      .toggle {
+        top: 1.2rem;
+        right: 5vw;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="bg-scene">
+    <div class="glow g1"></div>
+    <div class="glow g2"></div>
+  </div>
+
+  <div class="toggle" role="group" aria-label="Theme toggle">
+    <button id="btn-dark" aria-label="Dark mode">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+      </svg>
+    </button>
+    <button id="btn-light" aria-label="Light mode">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="4" />
+        <path
+          d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+      </svg>
+    </button>
+  </div>
+
+  <header>
+    <div class="eyebrow">Selected Work</div>
+    <h1>Projects &amp; <em>Prototypes</em></h1>
+  </header>
+
+  <section class="group" id="projects">
+    <div class="group-head">
+      <h2><span class="num">01</span> Live Projects</h2>
+    </div>
+    <div class="grid">
+
+      <a class="card" href="https://samdo.ae" target="_blank" rel="noopener">
+        <div class="preview">
+          <iframe src="https://samdo.ae" loading="lazy" tabindex="-1"></iframe>
+          <div class="veil"></div>
+          <span class="visit">Visit site ↗</span>
+        </div>
+        <div class="meta">
+          <span class="tag">Live · UAE</span>
+          <h3>Samdo</h3>
+          <p>A production business platform serving customers in the UAE market.</p>
+          <span class="url">samdo.ae</span>
+        </div>
+      </a>
+
+      <a class="card" href="https://virt-calls.com" target="_blank" rel="noopener">
+        <div class="preview">
+          <iframe src="https://virt-calls.com" loading="lazy" tabindex="-1"></iframe>
+          <div class="veil"></div>
+          <span class="visit">Visit site ↗</span>
+        </div>
+        <div class="meta">
+          <span class="tag">Live · Communications</span>
+          <h3>Virt Calls</h3>
+          <p>A virtual calling platform built for real-time voice and video communication.</p>
+          <span class="url">virt-calls.com</span>
+        </div>
+      </a>
+
+      <a class="card" href="https://ehare-tech.com" target="_blank" rel="noopener">
+        <div class="preview">
+          <iframe src="https://ehare-tech.com" loading="lazy" tabindex="-1"></iframe>
+          <div class="veil"></div>
+          <span class="visit">Visit site ↗</span>
+        </div>
+        <div class="meta">
+          <span class="tag">Live · Tech Services</span>
+          <h3>Ehare Tech</h3>
+          <p>A technology services platform delivering digital solutions to clients.</p>
+          <span class="url">ehare-tech.com</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <div class="divider">
+    <div class="line"></div>
+  </div>
+
+  <section class="group" id="prototypes">
+    <div class="group-head">
+      <h2><span class="num">02</span> Prototypes &amp; MVPs</h2>
+    </div>
+    <div class="grid">
+      <a class="card" href="https://conte-vr.vercel.app/" target="_blank" rel="noopener">
+        <div class="preview">
+          <iframe src="https://conte-vr.vercel.app/" loading="lazy" tabindex="-1"></iframe>
+          <div class="veil"></div>
+          <span class="visit">Visit site ↗</span>
+        </div>
+        <div class="meta">
+          <span class="tag">Prototype · EDTECH</span>
+          <h3>ConteVR</h3>
+          <p>A virtual reality concept for immersive experiences.</p>
+          <span class="url">https://conte-vr.vercel.app/</span>
+        </div>
+      </a>
+
+      <a class="card" href="https://wasfati-dz.vercel.app/" target="_blank" rel="noopener">
+        <div class="preview">
+          <iframe src="https://wasfati-dz.vercel.app/" loading="lazy" tabindex="-1"></iframe>
+          <div class="veil"></div>
+          <span class="visit">Visit site ↗</span>
+        </div>
+        <div class="meta">
+          <span class="tag">Prototype · Algeria</span>
+          <h3>Wasfati</h3>
+          <p>A prescription / recipe-style tracking app concept built for the Algerian market.</p>
+          <span class="url">wasfati-dz.vercel.app</span>
+        </div>
+      </a>
+
+      <a class="card" href="https://study-tracking-one.vercel.app/" target="_blank" rel="noopener">
+        <div class="preview">
+          <iframe src="https://study-tracking-one.vercel.app/" loading="lazy" tabindex="-1"></iframe>
+          <div class="veil"></div>
+          <span class="visit">Visit site ↗</span>
+        </div>
+        <div class="meta">
+          <span class="tag">Prototype · EdTech</span>
+          <h3>Study Tracking</h3>
+          <p>A student productivity tool for planning, tracking, and staying on top of study goals.</p>
+          <span class="url">study-tracking-one.vercel.app</span>
+        </div>
+      </a>
+
+      <a class="card" href="https://mmb-vetements.vercel.app/" target="_blank" rel="noopener">
+        <div class="preview">
+          <iframe src="https://mmb-vetements.vercel.app/" loading="lazy" tabindex="-1"></iframe>
+          <div class="veil"></div>
+          <span class="visit">Visit site ↗</span>
+        </div>
+        <div class="meta">
+          <span class="tag">Prototype · E-commerce</span>
+          <h3>MMB Vêtements</h3>
+          <p>A clothing storefront concept with product browsing and a clean retail layout.</p>
+          <span class="url">mmb-vetements.vercel.app</span>
+        </div>
+      </a>
+
+      <a class="card" href="https://al-imar-dhaki.vercel.app/" target="_blank" rel="noopener">
+        <div class="preview">
+          <iframe src="https://al-imar-dhaki.vercel.app/" loading="lazy" tabindex="-1"></iframe>
+          <div class="veil"></div>
+          <span class="visit">Visit site ↗</span>
+        </div>
+        <div class="meta">
+          <span class="tag">Prototype · Real Estate</span>
+          <h3>Al-Imar Dhaki</h3>
+          <p>A real estate / property development showcase concept.</p>
+          <span class="url">al-imar-dhaki.vercel.app</span>
+        </div>
+      </a>
+
+      <a class="card" href="https://lisanova.vercel.app/" target="_blank" rel="noopener">
+        <div class="preview">
+          <iframe src="https://lisanova.vercel.app/" loading="lazy" tabindex="-1"></iframe>
+          <div class="veil"></div>
+          <span class="visit">Visit site ↗</span>
+        </div>
+        <div class="meta">
+          <span class="tag">Prototype · Language Learning</span>
+          <h3>Lisanova</h3>
+          <p>A language-learning app concept blending "lisan" (language) with a modern learning flow.</p>
+          <span class="url">lisanova.vercel.app</span>
+        </div>
+      </a>
+
+      <a class="card" href="https://atlasdz-ai.vercel.app/" target="_blank" rel="noopener">
+        <div class="preview">
+          <iframe src="https://atlasdz-ai.vercel.app/" loading="lazy" tabindex="-1"></iframe>
+          <div class="veil"></div>
+          <span class="visit">Visit site ↗</span>
+        </div>
+        <div class="meta">
+          <span class="tag">Prototype · AI</span>
+          <h3>Atlas DZ AI</h3>
+          <p>An AI-powered assistant / tooling concept built for the Algerian market.</p>
+          <span class="url">atlasdz-ai.vercel.app</span>
+        </div>
+      </a>
+
+      <a class="card" href="https://acad-zone.vercel.app/" target="_blank" rel="noopener">
+        <div class="preview">
+          <iframe src="https://acad-zone.vercel.app/" loading="lazy" tabindex="-1"></iframe>
+          <div class="veil"></div>
+          <span class="visit">Visit site ↗</span>
+        </div>
+        <div class="meta">
+          <span class="tag">Prototype · EdTech</span>
+          <h3>Acad Zone</h3>
+          <p>An academic resources hub concept for students and course content.</p>
+          <span class="url">acad-zone.vercel.app</span>
+        </div>
+      </a>
+
+      <a class="card" href="https://e-sanad.vercel.app/" target="_blank" rel="noopener">
+        <div class="preview">
+          <iframe src="https://e-sanad.vercel.app/" loading="lazy" tabindex="-1"></iframe>
+          <div class="veil"></div>
+          <span class="visit">Visit site ↗</span>
+        </div>
+        <div class="meta">
+          <span class="tag">Prototype · Digital Services</span>
+          <h3>E-Sanad</h3>
+          <p>A digital certification / support-services concept ("sanad" — official backing or support).</p>
+          <span class="url">e-sanad.vercel.app</span>
+        </div>
+      </a>
+
+      <a class="card" href="https://thesis-script.github.io/absenta/" target="_blank" rel="noopener">
+        <div class="preview">
+          <iframe src="https://thesis-script.github.io/absenta/" loading="lazy" tabindex="-1"></iframe>
+          <div class="veil"></div>
+          <span class="visit">Visit site ↗</span>
+        </div>
+        <div class="meta">
+          <span class="tag">Prototype · Attendance</span>
+          <h3>Absenta</h3>
+          <p>An attendance-tracking tool concept for classrooms or teams.</p>
+          <span class="url">thesis-script.github.io/absenta</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <footer>
+    <p class="credit">Created by <span>ay.da</span></p>
+  </footer>
+
+  <script>
+    // theme handling
+    const root = document.documentElement;
+    const btnDark = document.getElementById('btn-dark');
+    const btnLight = document.getElementById('btn-light');
+
+    function applyTheme(theme) {
+      root.setAttribute('data-theme', theme);
+      btnDark.classList.toggle('active', theme === 'dark');
+      btnLight.classList.toggle('active', theme === 'light');
+      try { localStorage.setItem('portfolio-theme', theme); } catch (e) { }
+    }
+
+    let saved = 'dark';
+    try {
+      saved = localStorage.getItem('portfolio-theme') ||
+        (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    } catch (e) { }
+    applyTheme(saved);
+
+    btnDark.addEventListener('click', () => applyTheme('dark'));
+    btnLight.addEventListener('click', () => applyTheme('light'));
+
+    // scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          entry.target.style.animationDelay = (i * 0.06) + 's';
+          entry.target.classList.add('in-view');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.card, .group-head').forEach(el => observer.observe(el));
+
+    // spotlight follows cursor per card
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--mx', (e.clientX - rect.left) + 'px');
+        card.style.setProperty('--my', (e.clientY - rect.top) + 'px');
+      });
+    });
+  </script>
+
+</body>
+
+</html>
