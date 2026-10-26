@@ -9,16 +9,14 @@
   <meta name="author" content="Ayda Nova">
   <meta name="theme-color" content="#0B0F2A">
 
-  <!-- Ayda Nova custom AN favicon -->
-  <link rel="icon" type="image/svg+xml" href="./logo-bg.jpg">
+  <link rel="icon" type="image/jpeg" href="./logo-bg.jpg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,400;9..144,500;9..144,600;9..144,1,400;9..144,1,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      /* Brand palette */
       --navy: #0B0F2A;
       --violet: #8B5CF6;
       --sky: #38BDF8;
@@ -62,11 +60,7 @@
       --glow-opacity: .35;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     html {
       scroll-behavior: smooth;
@@ -78,19 +72,13 @@
       overflow-x: hidden;
       background: var(--bg);
       color: var(--ink);
-      font-family: 'Inter', sans-serif;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
       -webkit-font-smoothing: antialiased;
       transition: background .35s ease, color .35s ease;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button {
-      font: inherit;
-    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
 
     button:focus-visible,
     a:focus-visible {
@@ -98,10 +86,7 @@
       outline-offset: 5px;
     }
 
-    ::selection {
-      color: var(--white);
-      background: var(--violet);
-    }
+    ::selection { color: var(--white); background: var(--violet); }
 
     .container {
       width: min(var(--content-width), 100% - 12vw);
@@ -109,7 +94,6 @@
     }
 
     /* Ambient background */
-
     .bg-scene {
       position: fixed;
       inset: 0;
@@ -128,27 +112,14 @@
       animation: drift 22s ease-in-out infinite alternate;
     }
 
-    .glow-blue {
-      top: -18vw;
-      left: -10vw;
-      background: var(--sky);
-    }
-
-    .glow-orange {
-      right: -12vw;
-      bottom: -18vw;
-      background: var(--violet);
-      animation-delay: -8s;
-    }
+    .glow-blue { top: -18vw; left: -10vw; background: var(--sky); }
+    .glow-orange { right: -12vw; bottom: -18vw; background: var(--violet); animation-delay: -8s; }
 
     @keyframes drift {
-      to {
-        transform: translate(4vw, 4vw) scale(1.12);
-      }
+      to { transform: translate(4vw, 4vw) scale(1.12); }
     }
 
     /* Navigation */
-
     .site-header {
       position: sticky;
       top: 0;
@@ -179,48 +150,28 @@
       height: 50px;
       display: grid;
       place-items: center;
+      overflow: hidden;
       border: 1px solid var(--line);
       border-radius: 13px;
       background: var(--surface);
     }
 
-    .brand-mark svg {
-      width: 31px;
-      height: 31px;
+    .brand-mark img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
-    .brand-name {
-      font-family: 'Fraunces', serif;
-      font-size: 1.32rem;
-      letter-spacing: -.04em;
-      font-weight: 500;
-    }
-
-    .brand-name span {
-      color: var(--accent-a);
-    }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 22px;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 25px;
-    }
+    .nav-right { display: flex; align-items: center; gap: 22px; }
+    .nav-links { display: flex; align-items: center; gap: 25px; }
 
     .nav-links a {
       color: var(--muted);
       font-size: .82rem;
       transition: color .2s;
     }
-
-    .nav-links a:hover {
-      color: var(--strong);
-    }
+    .nav-links a:hover { color: var(--strong); }
 
     .theme-toggle {
       display: flex;
@@ -249,13 +200,9 @@
       background: linear-gradient(135deg, var(--sky), var(--violet));
     }
 
-    .theme-toggle svg {
-      width: 16px;
-      height: 16px;
-    }
+    .theme-toggle svg { width: 16px; height: 16px; }
 
     /* Hero */
-
     .hero {
       padding-top: clamp(80px, 12vw, 150px);
       padding-bottom: 90px;
@@ -284,7 +231,7 @@
     .hero h1 {
       max-width: 950px;
       color: var(--strong);
-      font: 500 clamp(3.1rem, 8vw, 7rem)/1.02 'Fraunces', serif;
+      font: 500 clamp(3.1rem, 8vw, 7rem)/1.02 'Fraunces', Georgia, serif;
       letter-spacing: -.055em;
     }
 
@@ -311,17 +258,9 @@
       line-height: 1.9;
     }
 
-    .hero-description strong {
-      color: var(--strong);
-      font-weight: 500;
-    }
+    .hero-description strong { color: var(--strong); font-weight: 500; }
 
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      flex-shrink: 0;
-    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; flex-shrink: 0; }
 
     .button {
       display: inline-flex;
@@ -337,9 +276,7 @@
       transition: transform .25s var(--ease), border-color .25s, background .25s;
     }
 
-    .button:hover {
-      transform: translateY(-3px);
-    }
+    .button:hover { transform: translateY(-3px); }
 
     .button-primary {
       color: var(--navy);
@@ -347,18 +284,9 @@
       background: linear-gradient(110deg, var(--sky), var(--violet));
     }
 
-    .button-secondary {
-      background: var(--surface);
-    }
-
-    .button-secondary:hover {
-      border-color: var(--accent-a);
-    }
-
-    .button svg {
-      width: 16px;
-      height: 16px;
-    }
+    .button-secondary { background: var(--surface); }
+    .button-secondary:hover { border-color: var(--accent-a); }
+    .button svg { width: 16px; height: 16px; }
 
     .hero-rule {
       height: 1px;
@@ -368,10 +296,7 @@
     }
 
     /* Project sections */
-
-    .project-section {
-      padding: 45px 0 65px;
-    }
+    .project-section { padding: 45px 0 65px; }
 
     .section-heading {
       display: flex;
@@ -391,7 +316,7 @@
 
     .section-heading h2 {
       color: var(--strong);
-      font: 500 clamp(1.8rem, 4vw, 2.7rem)/1.15 'Fraunces', serif;
+      font: 500 clamp(1.8rem, 4vw, 2.7rem)/1.15 'Fraunces', Georgia, serif;
       letter-spacing: -.035em;
     }
 
@@ -408,7 +333,6 @@
     }
 
     /* Project cards */
-
     .card {
       --mx: 50%;
       --my: 50%;
@@ -419,19 +343,15 @@
       border-radius: var(--radius);
       background: var(--surface);
       transition: transform .35s var(--ease), border-color .35s, background .35s, box-shadow .35s;
-      animation: fade-up .7s var(--ease) both;
+      /* FIX: "backwards" instead of "both" and no opacity:0 keyframe,
+         so cards are always visible even if the animation never runs */
+      animation: fade-up .7s var(--ease) backwards;
       animation-delay: var(--delay, 0ms);
     }
 
     @keyframes fade-up {
-      from {
-        opacity: 0;
-        transform: translateY(16px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { transform: translateY(16px); }
+      to   { transform: translateY(0); }
     }
 
     .card::after {
@@ -451,14 +371,9 @@
       box-shadow: 0 24px 55px -32px var(--shadow);
     }
 
-    .card:hover::after {
-      opacity: 1;
-    }
+    .card:hover::after { opacity: 1; }
 
-    .card-link {
-      display: block;
-      height: 100%;
-    }
+    .card-link { display: block; height: 100%; }
 
     .preview {
       position: relative;
@@ -485,9 +400,7 @@
       transition: transform .5s var(--ease);
     }
 
-    .card:hover .preview iframe {
-      transform: scale(.26);
-    }
+    .card:hover .preview iframe { transform: scale(.26); }
 
     .preview-shade {
       position: absolute;
@@ -511,6 +424,7 @@
       color: var(--lavender);
       font: .63rem 'IBM Plex Mono', monospace;
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
 
     .preview-label::before {
@@ -544,11 +458,7 @@
       transform: translateY(0);
     }
 
-    .meta {
-      position: relative;
-      z-index: 1;
-      padding: 22px;
-    }
+    .meta { position: relative; z-index: 1; padding: 22px; }
 
     .meta-top {
       display: flex;
@@ -577,10 +487,7 @@
       transition: color .25s, border-color .25s, transform .25s;
     }
 
-    .external-icon svg {
-      width: 14px;
-      height: 14px;
-    }
+    .external-icon svg { width: 14px; height: 14px; }
 
     .card:hover .external-icon {
       color: var(--accent-b);
@@ -591,7 +498,7 @@
     .meta h3 {
       margin-bottom: 9px;
       color: var(--strong);
-      font: 500 1.45rem/1.25 'Fraunces', serif;
+      font: 500 1.45rem/1.25 'Fraunces', Georgia, serif;
       letter-spacing: -.02em;
     }
 
@@ -615,7 +522,6 @@
     }
 
     /* Contact */
-
     .contact {
       display: flex;
       align-items: center;
@@ -635,7 +541,7 @@
     .contact h2 {
       margin-bottom: 12px;
       color: var(--strong);
-      font: 500 clamp(1.9rem, 4vw, 3rem)/1.15 'Fraunces', serif;
+      font: 500 clamp(1.9rem, 4vw, 3rem)/1.15 'Fraunces', Georgia, serif;
       letter-spacing: -.04em;
     }
 
@@ -646,15 +552,10 @@
       line-height: 1.8;
     }
 
-    .contact .button {
-      flex-shrink: 0;
-    }
+    .contact .button { flex-shrink: 0; }
 
     /* Footer */
-
-    .footer {
-      border-top: 1px solid var(--line);
-    }
+    .footer { border-top: 1px solid var(--line); }
 
     .footer-inner {
       min-height: 105px;
@@ -666,12 +567,10 @@
 
     .footer-brand {
       color: var(--strong);
-      font: 500 1.15rem 'Fraunces', serif;
+      font: 500 1.15rem 'Fraunces', Georgia, serif;
     }
 
-    .footer-brand span {
-      color: var(--accent-a);
-    }
+    .footer-brand span { color: var(--accent-a); }
 
     .footer-note {
       color: var(--muted);
@@ -679,124 +578,48 @@
       text-align: right;
     }
 
-    .footer-note span {
-      color: var(--accent-b);
-    }
+    .footer-note span { color: var(--accent-b); }
 
-    /* Responsive layout */
-
+    /* Responsive */
     @media (max-width: 1000px) {
-      .project-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .hero-bottom {
-        align-items: flex-start;
-        flex-direction: column;
-      }
+      .project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .hero-bottom { align-items: flex-start; flex-direction: column; }
     }
 
     @media (max-width: 650px) {
-      .container {
-        width: calc(100% - 36px);
-      }
-
-      .nav {
-        min-height: 68px;
-      }
-
-      .brand-mark {
-        width: 36px;
-        height: 36px;
-      }
-
-      .brand-name {
-        font-size: 1.15rem;
-      }
-
-      .nav-right {
-        gap: 10px;
-      }
-
-      .nav-links {
-        gap: 12px;
-      }
-
-      .nav-links a {
-        font-size: .73rem;
-      }
-
-      .nav-links a:first-child {
-        display: none;
-      }
-
-      .theme-toggle button {
-        width: 29px;
-        height: 29px;
-      }
-
-      .hero {
-        padding-top: 85px;
-        padding-bottom: 55px;
-      }
-
-      .hero h1 {
-        font-size: clamp(3rem, 13vw, 5rem);
-      }
-
-      .hero-rule {
-        margin-top: 45px;
-      }
-
-      .project-section {
-        padding: 35px 0 45px;
-      }
-
-      .project-grid {
-        grid-template-columns: 1fr;
-        gap: 18px;
-      }
-
-      .meta p {
-        min-height: 0;
-      }
-
-      .preview-visit {
-        opacity: 1;
-        transform: none;
-      }
-
-      .contact {
-        align-items: flex-start;
-        flex-direction: column;
-        margin-bottom: 50px;
-      }
-
+      .container { width: calc(100% - 36px); }
+      .nav { min-height: 68px; }
+      .brand-mark { width: 36px; height: 36px; }
+      .nav-right { gap: 10px; }
+      .nav-links { gap: 12px; }
+      .nav-links a { font-size: .73rem; }
+      .nav-links a:first-child { display: none; }
+      .theme-toggle button { width: 29px; height: 29px; }
+      .hero { padding-top: 85px; padding-bottom: 55px; }
+      .hero h1 { font-size: clamp(3rem, 13vw, 5rem); }
+      .hero-rule { margin-top: 45px; }
+      .project-section { padding: 35px 0 45px; }
+      .project-grid { grid-template-columns: 1fr; gap: 18px; }
+      .meta p { min-height: 0; }
+      .preview-visit { opacity: 1; transform: none; }
+      .contact { align-items: flex-start; flex-direction: column; margin-bottom: 50px; }
       .footer-inner {
         align-items: flex-start;
         flex-direction: column;
         justify-content: center;
         padding-block: 25px;
       }
-
-      .footer-note {
-        text-align: left;
-      }
+      .footer-note { text-align: left; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
+      *, *::before, *::after {
         scroll-behavior: auto !important;
         animation-duration: .01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: .01ms !important;
       }
-
-      .glow {
-        animation: none;
-      }
+      .glow { animation: none; }
     }
   </style>
 </head>
@@ -811,8 +634,8 @@
   <header class="site-header">
     <nav class="nav container" aria-label="Main navigation">
       <a href="#home" class="brand" aria-label="Ayda Nova home">
-        <span class="brand-mark" aria-hidden="true">
-          <img src="./logo-bg.jpg" alt="Ayda Nova logo" class="brand-mark">
+        <span class="brand-mark">
+          <img src="./logo-bg.jpg" alt="Ayda Nova logo">
         </span>
       </a>
 
@@ -825,17 +648,13 @@
         </div>
 
         <div class="theme-toggle" role="group" aria-label="Color theme">
-          <button id="btn-dark" class="active" aria-label="Switch to dark theme"
-            aria-pressed="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              stroke-width="1.8" aria-hidden="true">
+          <button id="btn-dark" class="active" aria-label="Switch to dark theme" aria-pressed="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
               <path d="M20.5 14A8.5 8.5 0 0 1 10 3.5 8.5 8.5 0 1 0 20.5 14Z"/>
             </svg>
           </button>
-          <button id="btn-light" aria-label="Switch to light theme"
-            aria-pressed="false">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              stroke-width="1.8" aria-hidden="true">
+          <button id="btn-light" aria-label="Switch to light theme" aria-pressed="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
               <circle cx="12" cy="12" r="4"/>
               <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/>
             </svg>
@@ -869,14 +688,12 @@
         <div class="hero-actions">
           <a href="#projects" class="button button-primary">
             Explore my work
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              stroke-width="2" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <path d="M7 17 17 7M7 7h10v10"/>
             </svg>
           </a>
 
-          <a href="mailto:thesisscript2@gmail.com"
-            class="button button-secondary">
+          <a href="mailto:thesisscript2@gmail.com" class="button button-secondary">
             Get in touch
           </a>
         </div>
@@ -923,10 +740,8 @@
         </p>
       </div>
 
-      <a class="button button-primary"
-        href="mailto:thesisscript2@gmail.com?subject=Hello%20Ayda%20Nova">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-          stroke-width="1.8" aria-hidden="true">
+      <a class="button button-primary" href="mailto:thesisscript2@gmail.com?subject=Hello%20Ayda%20Nova">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
           <rect x="3" y="5" width="18" height="14" rx="2"/>
           <path d="m3 7 9 6 9-6"/>
         </svg>
@@ -948,33 +763,28 @@
   </footer>
 
   <script>
-    // Project information
-    // Edit titles, categories, descriptions, and URLs here.
-
+    // Project information. Edit titles, categories, descriptions, and URLs here.
     const liveProjects = [
       {
         name: "Samdo",
         category: "Business platform",
         label: "Live · UAE",
         url: "https://samdo.ae",
-        description:
-          "A production business platform serving customers in the UAE market."
+        description: "A production business platform serving customers in the UAE market."
       },
       {
         name: "Virta Calls",
         category: "Communications",
         label: "Live · Communications",
         url: "https://virta-calls.com",
-        description:
-          "A virtual calling platform built for real-time voice and video communication."
+        description: "A virtual calling platform built for real-time voice and video communication."
       },
       {
         name: "Ehare Tech",
         category: "Technology",
         label: "Live · Tech services",
         url: "https://ehare-tech.com",
-        description:
-          "A technology services platform delivering digital solutions to clients."
+        description: "A technology services platform delivering digital solutions to clients."
       }
     ];
 
@@ -984,76 +794,66 @@
         category: "EdTech",
         label: "Prototype · EdTech",
         url: "https://conte-vr.vercel.app/",
-        description:
-          "A virtual reality concept exploring immersive digital experiences."
+        description: "A virtual reality concept exploring immersive digital experiences."
       },
       {
         name: "Study Tracking",
         category: "Education",
         label: "Prototype · EdTech",
         url: "https://study-tracking-one.vercel.app/",
-        description:
-          "A student productivity concept for planning, tracking, and managing study goals."
+        description: "A student productivity concept for planning, tracking, and managing study goals."
       },
       {
         name: "MMB Vêtements",
         category: "E-commerce",
         label: "Prototype · E-commerce",
         url: "https://mmb-vetements.vercel.app/",
-        description:
-          "A clothing storefront concept with product browsing and a clean retail layout."
+        description: "A clothing storefront concept with product browsing and a clean retail layout."
       },
       {
         name: "Al-Imar Dhaki",
         category: "Real estate",
         label: "Prototype · Real estate",
         url: "https://al-imar-dhaki.vercel.app/",
-        description:
-          "A real estate platform concept showcasing property-related digital experiences."
+        description: "A real estate platform concept showcasing property-related digital experiences."
       },
       {
         name: "Lisanova",
         category: "Language learning",
         label: "Prototype · Learning",
         url: "https://lisanova.vercel.app/",
-        description:
-          "A language-learning concept combining accessible learning flows with a modern interface."
+        description: "A language-learning concept combining accessible learning flows with a modern interface."
       },
       {
         name: "Atlas DZ AI",
         category: "Artificial intelligence",
         label: "Prototype · AI",
         url: "https://atlasdz-ai.vercel.app/",
-        description:
-          "An AI-powered assistant concept designed around the Algerian market."
+        description: "An AI-powered assistant concept designed around the Algerian market."
       },
       {
         name: "Acad Zone",
         category: "Education",
         label: "Prototype · EdTech",
         url: "https://acad-zone.vercel.app/",
-        description:
-          "An academic resources hub concept for students and educational content."
+        description: "An academic resources hub concept for students and educational content."
       },
       {
         name: "E-Sanad",
         category: "Digital services",
         label: "Prototype · Digital services",
         url: "https://e-sanad.vercel.app/",
-        description:
-          "A digital certification and support-services concept."
+        description: "A digital certification and support-services concept."
       },
       {
         name: "Absenta",
         category: "Attendance",
         label: "Prototype · Productivity",
         url: "https://thesis-script.github.io/absenta/",
-        description:
-          "An attendance-tracking tool concept for classrooms and teams."
+        description: "An attendance-tracking tool concept for classrooms and teams."
       }
     ];
 
-    // Safely build cards from project data.
     function createProjectCard(project, index) {
       const card = document.createElement("article");
       card.className = "card";
@@ -1069,13 +869,16 @@
       const preview = document.createElement("div");
       preview.className = "preview";
 
+      // FIX: sandboxed iframe (no top-navigation, so embedded sites can't
+      // redirect your page) and the URL is loaded later, only when visible.
       const iframe = document.createElement("iframe");
-      iframe.src = project.url;
       iframe.title = `${project.name} website preview`;
       iframe.loading = "lazy";
       iframe.tabIndex = -1;
       iframe.setAttribute("aria-hidden", "true");
+      iframe.setAttribute("sandbox", "allow-scripts allow-same-origin");
       iframe.referrerPolicy = "no-referrer";
+      iframe.dataset.src = project.url;
 
       const label = document.createElement("span");
       label.className = "preview-label";
@@ -1105,8 +908,7 @@
       icon.className = "external-icon";
       icon.setAttribute("aria-hidden", "true");
       icon.innerHTML = `
-        <svg viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="1.8">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
           <path d="M7 17 17 7M7 7h10v10"/>
         </svg>`;
 
@@ -1141,8 +943,36 @@
       container.replaceChildren(fragment);
     }
 
-    renderProjects(liveProjects, "live-project-grid");
-    renderProjects(prototypeProjects, "prototype-grid");
+    // FIX: errors can no longer stop the rest of the script
+    try {
+      renderProjects(liveProjects, "live-project-grid");
+      renderProjects(prototypeProjects, "prototype-grid");
+    } catch (error) {
+      console.error("Render error:", error);
+    }
+
+    // Load iframe previews only when their card is near the viewport.
+    function loadFrame(card) {
+      const frame = card.querySelector("iframe");
+      if (frame && !frame.src && frame.dataset.src) {
+        frame.src = frame.dataset.src;
+      }
+    }
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            loadFrame(entry.target);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { rootMargin: "200px" });
+
+      document.querySelectorAll(".card").forEach((card) => observer.observe(card));
+    } else {
+      document.querySelectorAll(".card").forEach(loadFrame);
+    }
 
     // Theme toggle with saved preference.
     const root = document.documentElement;
@@ -1165,7 +995,7 @@
         try {
           localStorage.setItem("portfolio-theme", theme);
         } catch (error) {
-          // The theme still works if browser storage is unavailable.
+          // Theme still works if storage is unavailable.
         }
       }
     }
@@ -1174,11 +1004,9 @@
 
     try {
       initialTheme = localStorage.getItem("portfolio-theme") ||
-        (window.matchMedia("(prefers-color-scheme: light)").matches
-          ? "light"
-          : "dark");
+        (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
     } catch (error) {
-      // Keep dark theme as the default.
+      // Keep dark as the default.
     }
 
     applyTheme(initialTheme, false);
@@ -1188,8 +1016,8 @@
 
     // Subtle cursor spotlight on project cards.
     if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
-      document.querySelectorAll(".card").forEach(card => {
-        card.addEventListener("pointermove", event => {
+      document.querySelectorAll(".card").forEach((card) => {
+        card.addEventListener("pointermove", (event) => {
           const rect = card.getBoundingClientRect();
           card.style.setProperty("--mx", `${event.clientX - rect.left}px`);
           card.style.setProperty("--my", `${event.clientY - rect.top}px`);
